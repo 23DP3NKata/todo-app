@@ -1,10 +1,9 @@
-// npm install
-
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const taskRoutes = require("./routes/tasks");
+const authRoutes = require("./routes/auth");
 const path = require("path");
 
 const app = express();
@@ -21,10 +20,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
+app.use("/auth", authRoutes);
 app.use("/tasks", taskRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

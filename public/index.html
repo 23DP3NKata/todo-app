@@ -8,12 +8,33 @@
 <body>
   <h1>My To-Do List</h1>
 
-  <form id="taskForm">
+  <!-- Sign-up form -->
+  <form id="signupForm" class="auth-form">
+    <h2>Sign Up</h2>
+    <input type="text" id="signupUsername" placeholder="Username" required />
+    <input type="password" id="signupPassword" placeholder="Password" required />
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <!-- Login form -->
+  <form id="loginForm" class="auth-form">
+    <h2>Log In</h2>
+    <input type="text" id="loginUsername" placeholder="Username" required />
+    <input type="password" id="loginPassword" placeholder="Password" required />
+    <button type="submit">Log In</button>
+  </form>
+
+  <!-- Logout button -->
+  <button id="logoutButton" style="display: none;">Log Out</button>
+
+  <!-- Task addition form -->
+  <form id="taskForm" style="display: none;">
     <input type="text" id="title" placeholder="Task title" required />
     <textarea id="description" placeholder="Task description"></textarea>
     <button type="submit">Add Task</button>
   </form>
 
+  <!-- Task list -->
   <div id="tasks"></div>
 
   <script src="script.js"></script>
