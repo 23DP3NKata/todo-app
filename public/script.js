@@ -81,6 +81,7 @@ async function loadTasks() {
         <h3>${task.title}</h3>
         <p>${task.description}</p>
         <p>Status: ${task.status}</p>
+        <button onclick="toggleTaskStatus('${task._id}', '${task.status}')">Toggle Status</button>
         <button onclick="deleteTask('${task._id}')">Delete</button>
       `;
       tasksDiv.appendChild(div);
@@ -127,5 +128,25 @@ async function deleteTask(id) {
     loadTasks();
   } else {
     alert("Failed to delete task.");
+  }
+}
+
+async function toggleTaskStatus(id, currentStatus) {
+  const token = localStorage.getItem("token");
+  const newStatus = currentStatus === "pending" ? "completed" : "pending";
+
+  const res = await fetch(`${API_URL}/tasks/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ status: newStatus }),
+  });
+
+  if (res.ok) {
+    loadTasks();
+  } else {
+    alert("Failed to update task status.");
   }
 }

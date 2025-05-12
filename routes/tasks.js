@@ -37,13 +37,13 @@ router.post("/", async (req, res) => {
 
 // Update an existing task
 router.put("/:id", async (req, res) => {
-  const { title, description, status } = req.body;
+  const { status } = req.body;
 
   try {
     const updatedTask = await Task.findOneAndUpdate(
-      { _id: req.params.id, userId: req.userId }, // Ensure the task belongs to the current user
-      { title, description, status },
-      { new: true } // Return the updated document
+      { _id: req.params.id, userId: req.userId },
+      { status },
+      { new: true }
     );
 
     if (!updatedTask) {
